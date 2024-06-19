@@ -10,6 +10,7 @@ import { notifications } from "@mantine/notifications";
 import TicketDetail from "../../../ticketsDetail/TicketDetail";
 
 const Ticket = ({ ticket }: { ticket: TicketType }) => {
+  const queryClient = useQueryClient();
   const { hovered, ref } = useHover();
 
   const {
@@ -24,7 +25,8 @@ const Ticket = ({ ticket }: { ticket: TicketType }) => {
   });
   const deleteMutation = useMutation({
     mutationFn: () => api.delete("/tickets/" + ticket.id),
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["tickets"] });
       notifications.show({
         title: "Ticket deleted",
         message: "Ticket successfully deleted",
@@ -33,6 +35,10 @@ const Ticket = ({ ticket }: { ticket: TicketType }) => {
     },
     onError: (error) => {
       // Handle the error accordingly
+      notifications.show({
+        title: "Something went wrong",
+        message: "",
+      });
       console.error("Error deleting ticket:", error);
     },
   });
@@ -67,7 +73,10 @@ const Ticket = ({ ticket }: { ticket: TicketType }) => {
                   confirm: "Delete ticket",
                   cancel: "No don't delete it",
                 },
-                confirmProps: { color: "red" },
+                confirmProps: {
+                  color: "red",
+                  loading: deleteMutation.isPending,
+                },
                 onCancel: closeAllModals,
                 onConfirm: () => deleteMutation.mutate(),
               })
