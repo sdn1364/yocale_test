@@ -1752,12 +1752,12 @@
 
 "@mantine/modals@^7.10.2":
   version "7.10.2"
-  resolved "https://registry.npmjs.org/@mantine/modals/-/modals-7.10.2.tgz"
+  resolved "https://registry.yarnpkg.com/@mantine/modals/-/modals-7.10.2.tgz#c341e70b033b3c0098ae3ebef39a3f7fe7e4886a"
   integrity sha512-L/gjPnvokciHOuTXFZqkc5b+ECAGKe/0l0LXlDwM3PvGJs1/Wa4DBCSy3pdGhKv+rMwFr2HiBc8nibCfwaR7IQ==
 
 "@mantine/notifications@^7.10.2":
   version "7.10.2"
-  resolved "https://registry.npmjs.org/@mantine/notifications/-/notifications-7.10.2.tgz"
+  resolved "https://registry.yarnpkg.com/@mantine/notifications/-/notifications-7.10.2.tgz#cb8990febc1226466f82c17a28354064fc0f3f30"
   integrity sha512-wX6qNBvpV7iqlH98AkGuS9plq02yYhTG7bkzP3Y7jd7o2ognLPoN83YeIaxzuZ/qVnWrwZrOHOx87Ox2e9Qyxw==
   dependencies:
     "@mantine/store" "7.10.2"
