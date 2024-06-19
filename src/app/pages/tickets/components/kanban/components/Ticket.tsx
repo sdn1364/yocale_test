@@ -93,7 +93,7 @@ const Ticket = ({ ticket }: { ticket: TicketType }) => {
           <Text fz={10} c="dimmed">
             Ticket number:
           </Text>
-          <Text>{ticket.number}</Text>
+          <Text test-id="ticket-number">{ticket.number}</Text>
         </Stack>
         {!error && !isLoading ? (
           <Avatar size="sm" src={user?.image} alt={user?.firstName} />
