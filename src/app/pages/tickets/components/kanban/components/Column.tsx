@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Center,
   Loader,
@@ -13,11 +13,13 @@ import { Ticket as TicketType } from "../../../../../../entities";
 import { api } from "../../../../../../api/api";
 import { IconExclamationCircle } from "@tabler/icons-react";
 import Ticket from "./Ticket";
+import { TicketViewContext } from "../../../context/TicketViewContext";
 
 interface Props {
   title: string;
 }
 const Column = ({ title }: Props) => {
+  const { selectedUser } = useContext(TicketViewContext);
   const {
     data: tickets,
     isLoading,
@@ -45,10 +47,12 @@ const Column = ({ title }: Props) => {
       ) : (
         <ScrollArea h={400}>
           <Stack gap="sm">
-            {tickets?.map((ticket, i) => {
-              if (ticket.status === title.toLowerCase())
-                return <Ticket ticket={ticket} key={title + " " + i} />;
-            })}
+            {tickets
+              ?.filter((t) => (selectedUser ? t.userId === selectedUser : t))
+              ?.map((ticket, i) => {
+                if (ticket.status === title.toLowerCase())
+                  return <Ticket ticket={ticket} key={title + " " + i} />;
+              })}
           </Stack>
         </ScrollArea>
       )}

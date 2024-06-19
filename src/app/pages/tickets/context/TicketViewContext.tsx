@@ -4,7 +4,7 @@ interface TicketContextProps {
   view: string;
   selectedUser: number | null;
   setTicketView: (value: string) => void;
-  handleSelectedUser: (userId: number) => void;
+  handleSelectedUser: (userId: number | null) => void;
 }
 
 export const TicketViewContext = createContext<TicketContextProps>({
@@ -20,7 +20,7 @@ const TicketViewProvider = ({ children }: PropsWithChildren) => {
   const setTicketView = (value: string) => {
     setView(value);
   };
-  const handleSelectedUser = (userId: number) => {
+  const handleSelectedUser = (userId: number | null) => {
     setSelectedUser(userId);
   };
   return (

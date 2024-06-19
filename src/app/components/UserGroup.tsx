@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Avatar, Group, Loader, Text, Menu, ScrollArea } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "../../entities";
 import { api } from "../../api/api";
+import { TicketViewContext } from "../pages/tickets/context/TicketViewContext";
 
 const UserGroup = () => {
+  const { handleSelectedUser } = useContext(TicketViewContext);
   const {
     data: users,
     isLoading,
@@ -30,8 +32,14 @@ const UserGroup = () => {
       </Menu.Target>
       <Menu.Dropdown>
         <ScrollArea h={200}>
+          <Menu.Item onClick={() => handleSelectedUser(null)}>
+            All Users
+          </Menu.Item>
           {users?.map((user) => (
-            <Menu.Item key={"menu" + user?.id}>
+            <Menu.Item
+              key={"menu" + user?.id}
+              onClick={() => handleSelectedUser(user.id)}
+            >
               <Group>
                 <Avatar size="sm" src={user?.image} />{" "}
                 <Text>
